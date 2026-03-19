@@ -7,6 +7,7 @@ struct Activity {
     char type[20];
     float duration;
     float distance;
+    char date[11];  // Format: YYYY-MM-DD
 };
 
 struct Activity activities[MAX];
@@ -28,6 +29,9 @@ void addActivity() {
     printf("Enter distance (km): ");
     scanf("%f", &activities[count].distance);
 
+    printf("Enter the date (YYYY-MM-DD): ");
+    scanf("%10s", activities[count].date);
+
     count++;
     printf("Activity added successfully!\n");
 }
@@ -42,7 +46,15 @@ void showStats() {
     float totalDuration = 0;
     float totalDistance = 0;
 
+    printf("\n--- Activities ---\n");
     for (int i = 0; i < count; i++) {
+        printf("%d. %s - Duration: %.2f min, Distance: %.2f km, Date: %s\n",
+               i + 1,
+               activities[i].type,
+               activities[i].duration,
+               activities[i].distance,
+               activities[i].date);
+
         totalDuration += activities[i].duration;
         totalDistance += activities[i].distance;
     }
